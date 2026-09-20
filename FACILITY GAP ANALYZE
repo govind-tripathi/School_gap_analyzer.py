@@ -1,0 +1,78 @@
+print("SCHOOL FACILITY GAP ANALYZER")
+
+schools = []
+
+while True:
+    print()
+    print("1. Add school")
+    print("2. Show gaps")
+    print("3. Show summary")
+    print("4. Exit")
+
+    choice = input("Enter choice: ")
+
+    if choice == "1":
+        name = input("School name: ")
+        electricity = input("Functional electricity? yes/no: ").lower()
+        water = input("Functional drinking water? yes/no: ").lower()
+        handwash = input("Hand-wash facility? yes/no: ").lower()
+
+        school = {
+            "name": name,
+            "electricity": electricity,
+            "water": water,
+            "handwash": handwash
+        }
+
+        schools.append(school)
+        print("School added.")
+
+    elif choice == "2":
+        if len(schools) == 0:
+            print("No schools recorded.")
+        else:
+            for school in schools:
+                gaps = []
+
+                if school["electricity"] != "yes":
+                    gaps.append("Electricity")
+
+                if school["water"] != "yes":
+                    gaps.append("Drinking Water")
+
+                if school["handwash"] != "yes":
+                    gaps.append("Hand-wash")
+
+                print()
+                print("School:", school["name"])
+
+                if len(gaps) == 0:
+                    print("No recorded facility gap.")
+                else:
+                    print("Gaps:", ", ".join(gaps))
+
+    elif choice == "3":
+        electricity_gap = 0
+        water_gap = 0
+        handwash_gap = 0
+
+        for school in schools:
+            if school["electricity"] != "yes":
+                electricity_gap += 1
+
+            if school["water"] != "yes":
+                water_gap += 1
+
+            if school["handwash"] != "yes":
+                handwash_gap += 1
+
+        print()
+        print("Electricity gap:", electricity_gap)
+        print("Drinking water gap:", water_gap)
+        print("Hand-wash gap:", handwash_gap)
+
+    elif choice == "4":
+        break
+
+    else:
+        print("Invalid choice.")
